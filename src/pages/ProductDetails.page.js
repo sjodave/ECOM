@@ -34,7 +34,7 @@ const ProductDetails = () => {
     const { id, images, title, price, description, category, rating } = data;
     return (
       <>
-        <div className="flex p-5 margin-left">
+        <div className="flex flex-row margin-left">
           <img
             src={images[0]}
             alt={title}

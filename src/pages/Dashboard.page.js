@@ -14,7 +14,11 @@ function Dashboard() {
     });
   }
 
-  return <div className="flex gap-6 flex-wrap mt-5 margin-left">{content}</div>;
+  return (
+    <div className="flex justify-evenly  gap-6 flex-wrap mt-5 margin-left">
+      {content}
+    </div>
+  );
 }
 
 export default Dashboard;

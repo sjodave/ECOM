@@ -1,42 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import "../Styles/Cart.page.css";
-import { useAddCartItemMutation } from "../utils/store";
-import { useNavigate } from "react-router-dom";
+
 import CartItem from "../components/CartItem.component";
+import calculateTotal from "../Helper/calculateTotal";
+import priceAfterDiscount from "../Helper/priceAfterDiscount";
 
 export default function Cart() {
-  const [addedCart, setCart] = useState([]);
-  const { id } = useSelector((state) => state.auth);
+  const { cartProducts: cart } = useSelector((state) => state.cartProducts);
 
-  const cartProducts = JSON.parse(localStorage.getItem(`cart`));
-  console.log(id);
-  const productsList = cartProducts?.map((product) => {
-    return {
-      id: product.id,
-      quantity: 1,
-    };
-  });
-  const [addItem] = useAddCartItemMutation();
-
-  useEffect(() => {
-    addItem({ id, productsList })
-      .unwrap()
-      .then((data) => setCart(data.products));
-  }, []);
-  const navigate = useNavigate();
-
-  const cart = addedCart;
-  console.log(cart);
-  const cartTotal = cart.reduce((acc, product) => {
-    return (acc += product.price * product.quantity);
-  }, 0);
   const discountedTotal = cart.reduce((acc, product) => {
-    return (acc += product.discountedPrice);
+    return (acc += +priceAfterDiscount(
+      product.price,
+      product.discountPercentage
+    ));
   }, 0);
+  const cartTotal = calculateTotal(cart, "price");
 
   return (
-    <div className=" margin-left">
+    <>
       <section className="Cart-container">
         <div className="Cart-products">
           <div className="Cart-products-title">
@@ -89,6 +71,6 @@ export default function Cart() {
           </div>
         </div>
       </section>
-    </div>
+    </>
   );
 }

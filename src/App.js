@@ -57,22 +57,24 @@ function App() {
           </div>
         </div>
       </main> */}
-        <Routes>
-          {/* <PublicRoute restricted={false} component={Home} path="/" exact />
+        <main className="flex-1 md:pl-72 p-4">
+          <Routes>
+            {/* <PublicRoute restricted={false} component={Home} path="/" exact />
         <PublicRoute restricted={true} component={SignIn} path="/signin" exact />
         <PublicRoute restricted={true} component={SignUp} path="/signup" exact />
         <PrivateRoute component={Dashboard} path="/dashboard" exact /> */}
 
-          {/* <Route path="/" element={<Home />} /> */}
-          <Route path="/" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="*" element={<NotFound />} />
-          <Route path="/products" element={<Dashboard />} />
-          <Route path="/products/:id" element={<ProductDetails />} />
-          <Route element={<Cart />} path="/cart" />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/wishlist" element={<Wishlist />} />
-        </Routes>
+            {/* <Route path="/" element={<Home />} /> */}
+            <Route path="/" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="*" element={<NotFound />} />
+            <Route path="/products" element={<Dashboard />} />
+            <Route path="/products/:id" element={<ProductDetails />} />
+            <Route element={<Cart />} path="/cart" />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/wishlist" element={<Wishlist />} />
+          </Routes>
+        </main>
       </div>
     </>
   );

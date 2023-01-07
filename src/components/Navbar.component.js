@@ -38,7 +38,7 @@ const Navbar = ({ sideOpen, setSideOpen }) => {
   ];
 
   return (
-    <div className="flex flex-1 flex-col md:pl-64">
+    <div className="flex flex-col md:pl-64">
       <div className="sticky top-0 z-10 flex h-16 flex-shrink-0 bg-white shadow">
         <button
           type="button"
