@@ -1,0 +1,108 @@
+.Product-image {
+  width: 100%;
+  height: 200px;
+}
+.Product-info {
+  position: relative;
+  padding: 0 10px;
+  text-align: left;
+}
+.Product-brand {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #282c3f;
+  margin-bottom: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.Product-name {
+  color: #535766;
+  font-size: 14px;
+  line-height: 1;
+  /* margin-bottom: 0;
+  margin-top: 0; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 400;
+}
+
+.Product-price {
+  line-height: 1.6;
+}
+.Product-discountedPrice {
+  font-size: 14px;
+  color: #282c3f;
+  font-weight: 500;
+}
+.Product-orignalPrice {
+  text-decoration: line-through;
+  color: #7e818c;
+  font-weight: 300;
+  margin-left: 3px;
+  font-size: 12px;
+}
+.Product-discountPercent {
+  color: #ff905a;
+  font-weight: 300;
+  font-size: 12px;
+  margin-left: 5px;
+}
+.Product-actions {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  padding: 10px 0;
+  width: 100%;
+  background-color: #fff;
+  opacity: 0;
+  transition: all 0.3s;
+  text-align: center;
+}
+.ProductCard:hover .Product-actions {
+  opacity: 1;
+}
+.Action-button {
+  background: none;
+  border-radius: 4px;
+  cursor: pointer;
+  min-height: 1em;
+  outline: 0;
+  border: none;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 9px 15px;
+  line-height: 1;
+  text-align: center;
+  transition: all 0.3s;
+}
+.Button-cart {
+  color: rgb(27, 28, 29);
+  border: 1 solid rgb(27, 28, 29);
+  box-shadow: rgb(27, 28, 29) 0px 0px 0px 1px inset;
+}
+.Button-cart:hover {
+  background-color: rgb(27, 28, 29);
+  color: #fff;
+}
+.Button-wishlist {
+  color: red;
+  border: 1 solid red;
+  box-shadow: red 0px 0px 0px 1px inset;
+}
+.Button-wishlist:hover {
+  background: red;
+  color: white;
+}
+.Button-wishlist:hover .fa-heart {
+  fill: #fff;
+}
+.fa-heart {
+  font-size: 15px;
+}
+.ProductCard:hover .Product-image {
+  filter: grayscale();
+}

@@ -12,12 +12,16 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
-import { Link } from "react-router-dom";
+import { FaShoppingCart } from "react-icons/fa";
+import { AiOutlineHeart } from "react-icons/ai";
+import { BiCategory } from "react-icons/bi";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const navigation = [
-  { name: "Dashboard", href: "/products", icon: HomeIcon, current: true },
-  { name: "Cart", href: "/cart", icon: HomeIcon, current: true },
-  { name: "Wishlist", href: "/wishlist", icon: HomeIcon, current: true },
+  { name: "Dashboard", href: "/", icon: HomeIcon, current: true },
+  { name: "Cart", href: "/cart", icon: FaShoppingCart, current: false },
+  { name: "Wishlist", href: "/wishlist", icon: AiOutlineHeart, current: false },
+  { name: "Category", href: "/category", icon: BiCategory, current: false },
 ];
 const userNavigation = [
   { name: "Your Profile", href: "#" },
@@ -30,6 +34,7 @@ function classNames(...classes) {
 }
 
 const Sidebar = ({ sideOpen, setSideOpen }) => {
+  const { pathname } = useLocation();
   return (
     <div>
       <Transition.Root show={sideOpen} as={Fragment}>
@@ -99,6 +104,10 @@ const Sidebar = ({ sideOpen, setSideOpen }) => {
                             : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
                           "group flex items-center px-2 py-2 text-base font-medium rounded-md"
                         )}
+                        onClick={(item) => {
+                          setSideOpen(false);
+                          item.current = true;
+                        }}
                       >
                         <item.icon
                           className={classNames(
@@ -110,6 +119,9 @@ const Sidebar = ({ sideOpen, setSideOpen }) => {
                           aria-hidden="true"
                         />
                         {item.name}
+                        {pathname === item.href
+                          ? (item.current = true)
+                          : (item.current = false)}
                       </Link>
                     ))}
                   </nav>
@@ -135,8 +147,8 @@ const Sidebar = ({ sideOpen, setSideOpen }) => {
           <div className="mt-5 flex flex-grow flex-col">
             <nav className="flex-1 space-y-1 px-2 pb-4">
               {navigation.map((item) => (
-                <a
-                  href={item.href}
+                <Link
+                  to={item.href}
                   key={item.name}
                   className={classNames(
                     item.current
@@ -155,7 +167,7 @@ const Sidebar = ({ sideOpen, setSideOpen }) => {
                     aria-hidden="true"
                   />
                   {item.name}
-                </a>
+                </Link>
               ))}
             </nav>
           </div>

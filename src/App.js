@@ -5,6 +5,7 @@ import "./App.css";
 import Navbar from "./components/Navbar.component";
 import Sidebar from "./components/Sidebar.component";
 import Cart from "./pages/Cart.page";
+import Category from "./pages/Category.page";
 import Dashboard from "./pages/Dashboard.page";
 import Home from "./pages/Home.page";
 import NotFound from "./pages/NotFound.page";
@@ -18,6 +19,7 @@ import PublicRoute from "./routes/PublicRoute";
 import { isLogin } from "./utils/Auth/authChecker";
 // import { AuthService } from "./utils/services/auth.service";
 import { useAuthMutation } from "./utils/store/api/authApi";
+
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const auth = useSelector((state) => state.auth);
@@ -36,7 +38,7 @@ function App() {
         </ul>
       </div> */}
       <div className="flex flex-col h-screen">
-        {auth ? (
+        {true ? (
           <>
             <Sidebar sideOpen={sidebarOpen} setSideOpen={setSidebarOpen} />
             <Navbar sideOpen={sidebarOpen} setSideOpen={setSidebarOpen} />
@@ -57,22 +59,27 @@ function App() {
           </div>
         </div>
       </main> */}
-        <Routes>
-          {/* <PublicRoute restricted={false} component={Home} path="/" exact />
+        <main className="flex-1 md:pl-72 p-4">
+          <Routes>
+            {/* <PublicRoute restricted={false} component={Home} path="/" exact />
         <PublicRoute restricted={true} component={SignIn} path="/signin" exact />
         <PublicRoute restricted={true} component={SignUp} path="/signup" exact />
         <PrivateRoute component={Dashboard} path="/dashboard" exact /> */}
 
-          {/* <Route path="/" element={<Home />} /> */}
-          <Route path="/" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="*" element={<NotFound />} />
-          <Route path="/products" element={<Dashboard />} />
-          <Route path="/products/:id" element={<ProductDetails />} />
-          <Route element={<Cart />} path="/cart" />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/wishlist" element={<Wishlist />} />
-        </Routes>
+            {/* <Route path="/" element={<Home />} /> */}
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="*" element={<NotFound />} />
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/products/:id" element={<ProductDetails />} />
+            <Route element={<PrivateRoute />}>
+              <Route element={<Cart />} path="/cart" />
+              <Route path="/wishlist" element={<Wishlist />} />
+              <Route path="/profile" element={<Profile />} />
+            </Route>
+            <Route path="/category" element={<Category />} />
+          </Routes>
+        </main>
       </div>
     </>
   );

@@ -7,6 +7,14 @@ export default function Wishlist() {
   let content = wishlistProducts?.map((product) => {
     return <Product key={product.id} product={product}></Product>;
   });
+  const itemsInWishlist = wishlistProducts?.length || 0;
 
-  return <div className="flex gap-6 flex-wrap mt-5 margin-left">{content}</div>;
+  return (
+    <>
+      <div>Wishlist Items: {itemsInWishlist}</div>
+      <div className="border border-block">
+        <div className="flex gap-6 flex-wrap m-4 margin-left">{content}</div>
+      </div>
+    </>
+  );
 }

@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { Form, Field } from "react-final-form";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
@@ -6,20 +7,22 @@ import {
   XMarkIcon,
   Bars3BottomLeftIcon,
 } from "@heroicons/react/24/outline";
-import { logout } from "../utils/Auth/authChecker";
+import { isLogin, logout } from "../utils/Auth/authChecker";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import { destroyUser } from "../utils/store/actions/Auth.actions";
 
 import { destroyUser } from "../utils/store";
 import { useNavigate } from "react-router-dom";
-import { click } from "@testing-library/user-event/dist/click";
+// import { click } from "@testing-library/user-event/dist/click";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 const Navbar = ({ sideOpen, setSideOpen }) => {
+  const auth = useSelector((state) => state.auth);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const navigateToProfile = () => {
@@ -28,17 +31,25 @@ const Navbar = ({ sideOpen, setSideOpen }) => {
   const handleLogout = () => {
     console.log("called");
     dispatch(destroyUser());
-    // localStorage.removeItem("TOKEN_KEY");
     logout();
     navigate("/");
   };
+  const handleSearch = (value) => {
+    console.log(value);
+  };
+  const handleLogin = () => {
+    navigate("/signin");
+  };
+
   const userNavigation = [
     { name: "Your Profile", href: "#", click: navigateToProfile },
-    { name: "Sign out", href: "#", click: handleLogout },
+    isLogin()
+      ? { name: "Logout", href: "#", click: handleLogout }
+      : { name: "Login", href: "#", click: handleLogin },
   ];
 
   return (
-    <div className="flex flex-1 flex-col md:pl-64">
+    <div className="flex flex-col md:pl-64">
       <div className="sticky top-0 z-10 flex h-16 flex-shrink-0 bg-white shadow">
         <button
           type="button"
@@ -49,25 +60,33 @@ const Navbar = ({ sideOpen, setSideOpen }) => {
           <Bars3BottomLeftIcon className="h-6 w-6" aria-hidden="true" />
         </button>
         <div className="flex flex-1 justify-end px-4">
-          {/* <div className="flex flex-1">
-                <form className="flex w-full md:ml-0" action="#" method="GET">
+          <div className="flex flex-1">
+            <Form
+              onSubmit={handleSearch}
+              // validate={validate}
+              render={({ handleSubmit }) => (
+                <form onSubmit={handleSubmit} className="flex w-full">
                   <label htmlFor="search-field" className="sr-only">
                     Search
                   </label>
                   <div className="relative w-full text-gray-400 focus-within:text-gray-600">
                     <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center">
-                      <MagnifyingGlassIcon className="h-5 w-5" aria-hidden="true" />
+                      <MagnifyingGlassIcon
+                        className="h-5 w-5"
+                        aria-hidden="true"
+                      />
                     </div>
-                    <input
-                      id="search-field"
-                      className="block h-full w-full border-transparent py-2 pl-8 pr-3 text-gray-900 placeholder-gray-500 focus:border-transparent focus:placeholder-gray-400 focus:outline-none focus:ring-0 sm:text-sm"
-                      placeholder="Search"
-                      type="search"
+                    <Field
                       name="search"
+                      component="input"
+                      placeholder="Search"
+                      className="block h-full w-full border-transparent py-2 pl-8 pr-3 text-gray-900 placeholder-gray-500 focus:border-transparent focus:placeholder-gray-400 focus:outline-none focus:ring-0 sm:text-sm"
                     />
                   </div>
                 </form>
-              </div> */}
+              )}
+            />
+          </div>
           <div className="ml-4 flex items-center md:ml-6">
             <button
               type="button"
@@ -83,8 +102,8 @@ const Navbar = ({ sideOpen, setSideOpen }) => {
                 <Menu.Button className="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                   <span className="sr-only">Open user menu</span>
                   <img
-                    className="h-8 w-8 rounded-full"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    className="h-8 w-8 rounded-full border border-black"
+                    src={auth?.image}
                     alt=""
                   />
                 </Menu.Button>
