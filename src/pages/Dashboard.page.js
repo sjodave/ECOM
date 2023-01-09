@@ -1,11 +1,13 @@
 import React from "react";
 import Product from "../components/Product.component";
 import { useFetchProductsQuery } from "../utils/store";
+import SkelProductList from "./Skeleton/SkelProductList";
 
 function Dashboard() {
   const { data, error, isFetching } = useFetchProductsQuery();
   let content;
   if (isFetching) {
+    return <SkelProductList />;
   } else if (error) {
     content = <div>{error}</div>;
   } else if (data) {

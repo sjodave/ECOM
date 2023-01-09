@@ -14,6 +14,8 @@ import { productsApi } from "./api/productsApi";
 import { productApi } from "./api/productApi";
 import { authApi } from "./api/authApi";
 import { cartApi } from "./api/cartApi";
+import { categoryApi } from "./api/categoryApi";
+
 import authSliceReducer from "./Slices/authSlice";
 import cartSliceReducer from "./Slices/cartSlice";
 import wishListSliceReducer from "./Slices/wishlistSlice";
@@ -23,6 +25,7 @@ export const store = configureStore({
     [productsApi.reducerPath]: productsApi.reducer,
     [productApi.reducerPath]: productApi.reducer,
     [cartApi.reducerPath]: cartApi.reducer,
+    [categoryApi.reducerPath]: categoryApi.reducer,
     auth: authSliceReducer,
     wishlist: wishListSliceReducer,
     cartProducts: cartSliceReducer,
@@ -32,7 +35,8 @@ export const store = configureStore({
       .concat(authApi.middleware)
       .concat(productsApi.middleware)
       .concat(productApi.middleware)
-      .concat(cartApi.middleware);
+      .concat(cartApi.middleware)
+      .concat(categoryApi.middleware);
   },
 });
 setupListeners(store.dispatch);
@@ -41,5 +45,6 @@ export * from "./api/authApi";
 export * from "./api/productsApi";
 export * from "./api/productApi";
 export * from "./api/cartApi";
+export * from "./api/categoryApi";
 export * from "./Slices/cartSlice";
 export * from "./Slices/wishlistSlice";

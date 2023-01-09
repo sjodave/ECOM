@@ -1,18 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { FaShoppingCart } from "react-icons/fa";
-import { AiOutlineHeart } from "react-icons/ai";
-import { TiHeartFullOutline } from "react-icons/ti";
 import isObjectInArray from "../Helper/isObjectInArray";
 
 import "../Styles/product.css";
-import {
-  deleteCartItem,
-  deleteWishlistItem,
-  setWishlist,
-  setCart,
-} from "../utils/store";
+import { deleteCartItem, setCart } from "../utils/store";
+import Heart from "./Heart.component";
 
 export default function ProductCard({ product }) {
   const navigate = useNavigate();
@@ -20,9 +13,7 @@ export default function ProductCard({ product }) {
   // const { displayFeedback, setFeedbackText } = useContext(FeedbackContext);
 
   const { cartProducts } = useSelector((state) => state.cartProducts);
-  const { wishlistProducts } = useSelector((state) => state.wishlist);
   let isProductInCart = isObjectInArray(cartProducts, product.id);
-  let isProductInWishlist = isObjectInArray(wishlistProducts, product.id);
 
   console.log(product);
   const priceAfterDiscount = (
@@ -42,19 +33,7 @@ export default function ProductCard({ product }) {
       dispatch(setCart(product));
     }
   };
-  const handleWishlistActions = (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-    if (isProductInWishlist) {
-      // displayFeedback("Removed From Wishlist");
-      isProductInWishlist = false;
-      dispatch(deleteWishlistItem(product.id));
-    } else {
-      // displayFeedback("Added to Wishlist");
-      isProductInWishlist = true;
-      dispatch(setWishlist(product));
-    }
-  };
+
   return (
     <div className="ProductCard">
       <div
@@ -69,16 +48,7 @@ export default function ProductCard({ product }) {
         <div className="Product-info">
           <div className="Product-actions">
             <div className="Action-Buttons">
-              <button
-                onClick={handleWishlistActions}
-                className="Action-button "
-              >
-                {isProductInWishlist ? (
-                  <TiHeartFullOutline className="text-lg text-red-500" />
-                ) : (
-                  <AiOutlineHeart className="text-lg" />
-                )}
-              </button>
+              <Heart product={product} />
               &nbsp;
               <button
                 onClick={handleCartActions}

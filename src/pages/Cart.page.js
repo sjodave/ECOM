@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import "../Styles/Cart.page.css";
-
 import CartItem from "../components/CartItem.component";
 import calculateTotal from "../Helper/calculateTotal";
 import priceAfterDiscount from "../Helper/priceAfterDiscount";
@@ -23,7 +22,7 @@ export default function Cart() {
         <div className="Cart-products">
           <div className="Cart-products-title">
             <span>My Cart ({cart.length} items)</span>
-            <span>Total: Rs.{cartTotal}</span>
+            <span>Total After Discount: ${discountedTotal}</span>
           </div>
           <div className="Cart-items-container">
             {cart.length === 0 ? <h3>Cart Empty</h3> : ""}
