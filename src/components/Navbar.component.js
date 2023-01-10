@@ -10,7 +10,6 @@ import {
 import { isLogin, logout } from "../utils/Auth/authChecker";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { useDispatch, useSelector } from "react-redux";
-// import { destroyUser } from "../utils/store/actions/Auth.actions";
 
 import { destroyUser } from "../utils/store";
 import { useNavigate } from "react-router-dom";
@@ -35,7 +34,7 @@ const Navbar = ({ sideOpen, setSideOpen }) => {
     navigate("/");
   };
   const handleSearch = (value) => {
-    console.log(value);
+    navigate(`/products/search/${value.search}`);
   };
   const handleLogin = () => {
     navigate("/signin");
@@ -64,8 +63,14 @@ const Navbar = ({ sideOpen, setSideOpen }) => {
             <Form
               onSubmit={handleSearch}
               // validate={validate}
-              render={({ handleSubmit }) => (
-                <form onSubmit={handleSubmit} className="flex w-full">
+              render={({ handleSubmit, form }) => (
+                <form
+                  onSubmit={(event) => {
+                    handleSubmit(event);
+                    form.reset();
+                  }}
+                  className="flex w-full"
+                >
                   <label htmlFor="search-field" className="sr-only">
                     Search
                   </label>

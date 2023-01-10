@@ -11,6 +11,7 @@ import Home from "./pages/Home.page";
 import NotFound from "./pages/NotFound.page";
 import ProductDetails from "./pages/ProductDetails.page";
 import Profile from "./pages/Profile.page";
+import SearchProducts from "./pages/SearchProducts.page";
 import SignIn from "./pages/Signin.page";
 import SignUp from "./pages/Signup.page";
 import Wishlist from "./pages/Wishlist.page";
@@ -72,6 +73,7 @@ function App() {
             <Route path="*" element={<NotFound />} />
             <Route path="/" element={<Dashboard />} />
             <Route path="/products/:id" element={<ProductDetails />} />
+            <Route path="/products/search/:id" element={<SearchProducts />} />
             <Route element={<PrivateRoute />}>
               <Route element={<Cart />} path="/cart" />
               <Route path="/wishlist" element={<Wishlist />} />

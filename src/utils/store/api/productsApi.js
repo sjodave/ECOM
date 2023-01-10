@@ -8,10 +8,13 @@ const productsApi = createApi({
   endpoints(builder) {
     return {
       fetchProducts: builder.query({
-        query: () => {
+        query: (skip) => {
           return {
             url: "/products",
             method: "GET",
+            params: {
+              skip: skip,
+            },
           };
         },
       }),
