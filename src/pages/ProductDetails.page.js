@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { setCart, useFetchProductQuery } from "../utils/store";
-
+import RatingStars from "../components/RatingStars.component";
 import Heart from "../components/Heart.component";
 import isObjectInArray from "../Helper/isObjectInArray";
 
@@ -15,7 +15,6 @@ const ProductDetails = () => {
   console.log(productId);
   console.log(cartProducts);
   const navigate = useNavigate();
-
   const goToCart = async () => {
     navigate("/cart");
   };
@@ -36,7 +35,9 @@ const ProductDetails = () => {
             <h4>{`Title: ${title}`}</h4>
             <div>{`Description: ${description}`}</div>
             <div>{`Price: ${price}`}</div>
-            <div>{`Rating: ${rating}`}</div>
+            <div className="flex gap-1">
+              Rating : <RatingStars rating={rating} /> {rating}
+            </div>
             <div className="mt-3">
               {!isProductInCart ? (
                 <button className="Checkout-button" onClick={addToCart}>

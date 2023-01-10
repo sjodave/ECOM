@@ -6,6 +6,7 @@ import isObjectInArray from "../Helper/isObjectInArray";
 import "../Styles/product.css";
 import { deleteCartItem, setCart } from "../utils/store";
 import Heart from "./Heart.component";
+import RatingStars from "./RatingStars.component";
 
 export default function ProductCard({ product }) {
   const navigate = useNavigate();
@@ -15,7 +16,6 @@ export default function ProductCard({ product }) {
   const { cartProducts } = useSelector((state) => state.cartProducts);
   let isProductInCart = isObjectInArray(cartProducts, product.id);
 
-  console.log(product);
   const priceAfterDiscount = (
     (product.price * (100 - product.discountPercentage)) /
     100
@@ -70,6 +70,7 @@ export default function ProductCard({ product }) {
             <span className="Product-discountPercent">
               ({product.discountPercentage}% OFF)
             </span>
+            <RatingStars rating={product.rating} />
           </div>
         </div>
       </div>
