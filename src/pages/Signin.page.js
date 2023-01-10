@@ -49,6 +49,8 @@ const SignIn = (props) => {
             <Form
               onSubmit={handleLogin}
               // validate={validate}
+              initialValues={{ username: "kminchelle", password: "0lelplR" }}
+              initialValuesEqual={() => true}
               render={({ handleSubmit }) => (
                 <form className="space-y-6" onSubmit={handleSubmit}>
                   <div className="relative w-full text-gray-400 focus-within:text-gray-600">
