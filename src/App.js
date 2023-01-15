@@ -26,6 +26,7 @@ function App() {
   const auth = useSelector((state) => state.auth);
   useEffect(() => {
     console.log("called useEffect from App JS");
+    console.log(process.env.BASEURL);
   }, []);
 
   return (

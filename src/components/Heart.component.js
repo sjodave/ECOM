@@ -17,7 +17,7 @@ export default function Heart({ product }) {
   };
   return (
     <button
-      className="rounded text-red hover:bg-gray-200 p-3 ml-3"
+      className="rounded text-red hover:bg-gray-200 p-2 ml-3"
       onClick={handleWishlistAction}
     >
       {isProductInWishlist ? (
