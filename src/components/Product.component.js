@@ -47,7 +47,7 @@ export default function ProductCard({ product }) {
         />
         <div className="Product-info">
           <div className="Product-actions">
-            <div className="Action-Buttons">
+            <div className="flex items-center">
               <Heart product={product} />
               &nbsp;
               <button

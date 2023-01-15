@@ -1,6 +1,5 @@
 import React from "react";
-import { Route, Navigate, Outlet } from "react-router-dom";
-import SignIn from "../pages/Signin.page";
+import { Navigate, Outlet } from "react-router-dom";
 import { isLogin } from "../utils/Auth/authChecker";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {

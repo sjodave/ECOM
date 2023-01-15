@@ -21,7 +21,7 @@ export default function Heart({ product }) {
       onClick={handleWishlistAction}
     >
       {isProductInWishlist ? (
-        <TiHeartFullOutline className="text-lg text-red-500" />
+        <TiHeartFullOutline className="text-lg text-red-500 animate-bounce" />
       ) : (
         <AiOutlineHeart className="text-lg" />
       )}

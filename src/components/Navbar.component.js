@@ -52,6 +52,7 @@ const Navbar = ({ sideOpen, setSideOpen }) => {
       <div className="sticky top-0 z-10 flex h-16 flex-shrink-0 bg-white shadow">
         <button
           type="button"
+          data-testid="nav-toggle-icon"
           className="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden"
           onClick={() => setSideOpen(true)}
         >
@@ -105,11 +106,13 @@ const Navbar = ({ sideOpen, setSideOpen }) => {
             <Menu as="div" className="relative ml-3">
               <div>
                 <Menu.Button className="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                  <span className="sr-only">Open user menu</span>
+                  <span className="sr-only" data-testid="bell">
+                    Open user menu
+                  </span>
                   <img
                     className="h-8 w-8 rounded-full border border-black"
                     src={auth?.image}
-                    alt=""
+                    alt="profileImage"
                   />
                 </Menu.Button>
               </div>

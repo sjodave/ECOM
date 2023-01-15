@@ -12,8 +12,7 @@ const ProductDetails = () => {
   const { data, error, isFetching } = useFetchProductQuery(productId);
   const { cartProducts } = useSelector((state) => state.cartProducts);
   let isProductInCart = isObjectInArray(cartProducts, productId);
-  console.log(productId);
-  console.log(cartProducts);
+
   const navigate = useNavigate();
   const goToCart = async () => {
     navigate("/cart");
@@ -29,7 +28,7 @@ const ProductDetails = () => {
     return (
       <>
         <div className="flex flex-row flex-wrap">
-          <img src={images[0]} alt={title} />
+          <img src={images[0]} alt={title} className=" max-h-60 max-w-5xl" />
           <div className="col-8 p-5">
             <div className=" text-gray-500 ">{category}</div>
             <h4>{`Title: ${title}`}</h4>

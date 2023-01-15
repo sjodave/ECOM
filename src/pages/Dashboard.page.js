@@ -1,30 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import Product from "../components/Product.component";
+import useSort from "../Hooks/use-sort";
 import { useFetchProductsQuery } from "../utils/store";
 import SkelProductList from "./Skeleton/SkelProductList";
 
 function Dashboard() {
-  const [sortby, setSortBy] = useState(null);
   const { data, error, isFetching } = useFetchProductsQuery();
-  let sortedData = data?.products;
-
-  const sortValue = (x) => {
-    return x[sortby[0]];
-  };
-  if (sortby) {
-    sortedData = [...data?.products].sort((a, b) => {
-      const valueA = sortValue(a);
-      const valueB = sortValue(b);
-
-      const reverseOrder = sortby[1] === "asc" ? 1 : -1;
-
-      if (typeof valueA === "string") {
-        return valueA.localeCompare(valueB) * reverseOrder;
-      } else {
-        return (valueA - valueB) * reverseOrder;
-      }
-    });
-  }
+  const { sortedData, setSortBy } = useSort(data);
 
   let content;
   if (isFetching) {

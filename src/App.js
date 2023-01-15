@@ -18,15 +18,14 @@ import Wishlist from "./pages/Wishlist.page";
 import PrivateRoute from "./routes/PrivateRoute";
 import PublicRoute from "./routes/PublicRoute";
 import { isLogin } from "./utils/Auth/authChecker";
-// import { AuthService } from "./utils/services/auth.service";
-import { useAuthMutation } from "./utils/store/api/authApi";
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const auth = useSelector((state) => state.auth);
   useEffect(() => {
     console.log("called useEffect from App JS");
-    console.log(process.env.BASEURL);
+    console.log(process.env.REACT_APP_BASE_URL);
+    console.log(process.env.BASE_URL);
   }, []);
 
   return (
