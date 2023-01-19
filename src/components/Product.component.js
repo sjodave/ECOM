@@ -35,7 +35,7 @@ export default function ProductCard({ product }) {
   };
 
   return (
-    <div className="ProductCard">
+    <li className="ProductCard">
       <div
         className="ProductCard-body w-36 md:w-44 mb-5 cursor-pointer"
         onClick={() => navigate(`/products/${product.id}`)}
@@ -74,6 +74,6 @@ export default function ProductCard({ product }) {
           </div>
         </div>
       </div>
-    </div>
+    </li>
   );
 }

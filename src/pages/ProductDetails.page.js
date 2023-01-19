@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { setCart, useFetchProductQuery } from "../utils/store";
@@ -9,10 +9,9 @@ import isObjectInArray from "../Helper/isObjectInArray";
 const ProductDetails = () => {
   const { id: productId } = useParams();
   const dispatch = useDispatch();
-  const { data, error, isFetching } = useFetchProductQuery(productId);
+  const { data, error, isFetching, refetch } = useFetchProductQuery(productId);
   const { cartProducts } = useSelector((state) => state.cartProducts);
   let isProductInCart = isObjectInArray(cartProducts, productId);
-
   const navigate = useNavigate();
   const goToCart = async () => {
     navigate("/cart");
@@ -21,8 +20,8 @@ const ProductDetails = () => {
     dispatch(setCart(data));
   };
 
-  if (isFetching) return;
-  if (error) return <div>{error}</div>;
+  if (isFetching) return <div>Loading...</div>;
+  if (error) return <div>Error fetching data</div>;
   if (data) {
     const { id, images, title, price, description, category, rating } = data;
     return (

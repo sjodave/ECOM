@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Product from "../components/Product.component";
 import useSort from "../Hooks/use-sort";
 import { useFetchProductsQuery } from "../utils/store";
 import SkelProductList from "./Skeleton/SkelProductList";
 
 function Dashboard() {
-  const { data, error, isFetching } = useFetchProductsQuery();
+  const { data, error, isFetching, refetch } = useFetchProductsQuery();
   const { sortedData, setSortBy } = useSort(data);
 
   let content;
   if (isFetching) {
     return <SkelProductList />;
   } else if (error) {
-    content = <div>{error}</div>;
+    content = <div>Error fetching data</div>;
   } else if (sortedData) {
     content = sortedData.map((product) => {
       return <Product key={product.id} product={product}></Product>;
@@ -33,9 +33,9 @@ function Dashboard() {
         <option value={["rating", "decs"]}>Rating</option>
         <option value={["price", "decs"]}>Price high to low</option>
       </select>
-      <div className="flex justify-evenly  gap-6 flex-wrap mt-5 margin-left">
+      <ul className="flex justify-evenly  gap-6 flex-wrap mt-5 margin-left">
         {content}
-      </div>
+      </ul>
     </div>
   );
 }

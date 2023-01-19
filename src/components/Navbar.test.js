@@ -1,20 +1,9 @@
-import { logRoles, render, screen } from "@testing-library/react";
-import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
-import { store } from "../utils/store";
+import { render, screen } from "../../test-utils";
 import Navbar from "./Navbar.component";
 
-const content = (
-  <Provider store={store}>
-    <BrowserRouter>
-      <Navbar />
-    </BrowserRouter>
-  </Provider>
-);
 describe("Navbar", () => {
   test("renders-correctly", () => {
-    const view = render(content);
-    // logRoles(view.container);
+    render(<Navbar />);
     const navtoggle = screen.getByTestId("nav-toggle-icon");
     expect(navtoggle).toBeInTheDocument();
 
@@ -31,7 +20,7 @@ describe("Navbar", () => {
   });
 
   test("notification button renders correctly", () => {
-    render(content);
+    render(<Navbar />);
     const notificationButton = screen.getByRole("button", {
       name: "View notifications",
     });

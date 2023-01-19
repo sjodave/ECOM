@@ -1,12 +1,12 @@
 import { renderHook } from "@testing-library/react";
 import useSort from "./use-sort";
-import { productsData } from "../mocks/products.mockData";
+import { productData } from "../mocks/mockData";
 
 describe("useSort", () => {
   test("should display non sorted data", () => {
     const { result } = renderHook(useSort, {
       initialProps: {
-        data: productsData.products,
+        data: productData.products,
       },
     });
     // console.log(result.current);
