@@ -8,15 +8,13 @@ import { productsList } from "../mocks/mockData";
 describe("Product D", () => {
   test("renders data", async () => {
     render(<Dashboard />);
-    const textElement = await screen.findByRole("heading", {
-      name: "iPhone 9",
-    });
+    const textElement = await screen.findByText(/iPhone 9/i);
+
     expect(textElement).toBeInTheDocument();
   });
 
   test("display list items", async () => {
     const length = productsList.products.length;
-    console.log(length);
     render(<Dashboard />);
     const listItems = await screen.findAllByRole("listitem");
     expect(listItems).toHaveLength(length);

@@ -35,15 +35,15 @@ export default function ProductCard({ product }) {
   };
 
   return (
-    <li className="ProductCard">
-      <div
-        className="ProductCard-body w-36 md:w-44 mb-5 cursor-pointer"
-        onClick={() => navigate(`/products/${product.id}`)}
-      >
+    <li
+      className="ProductCard"
+      onClick={() => navigate(`/products/${product.id}`)}
+    >
+      <div className="ProductCard-body w-36 md:w-44 mb-5 cursor-pointer">
         <img
           className="Product-image  object-fill"
           src={product.thumbnail}
-          alt=""
+          alt={product.title}
         />
         <div className="Product-info">
           <div className="Product-actions">
@@ -59,7 +59,7 @@ export default function ProductCard({ product }) {
             </div>
           </div>
           <h3 className="Product-brand mt-2">{product.brand}</h3>
-          <h4 className="Product-name">{product.title}</h4>
+          <div className="Product-name">{product.title}</div>
           <div className="Product-price">
             <span>
               <span className="Product-discountedPrice">

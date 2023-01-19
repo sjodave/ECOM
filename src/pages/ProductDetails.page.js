@@ -26,6 +26,7 @@ const ProductDetails = () => {
     const { id, images, title, price, description, category, rating } = data;
     return (
       <>
+        Product Details:
         <div className="flex flex-row flex-wrap">
           <img src={images[0]} alt={title} className=" max-h-60 max-w-5xl" />
           <div className="col-8 p-5">

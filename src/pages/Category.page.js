@@ -47,7 +47,7 @@ export default function Category() {
   return (
     <div>
       <div className="flex flex-wrap gap-1 ">{renderCategoryList}</div>
-      <div className="flex flex-wrap mt-4 gap-4">{content}</div>
+      <ul className="flex flex-wrap mt-4 gap-4">{content}</ul>
     </div>
   );
 }

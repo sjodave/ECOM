@@ -4,6 +4,7 @@ import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { store } from "./src/utils/store";
 import { BrowserRouter } from "react-router-dom";
+import userEvent from "@testing-library/user-event";
 
 const AllTheProviders = ({ children }) => {
   return (
@@ -13,9 +14,14 @@ const AllTheProviders = ({ children }) => {
   );
 };
 
-const customRender = (ui, options) =>
-  render(ui, { wrapper: AllTheProviders, ...options });
+const customRender = (ui, options, { route = "/" } = {}) => {
+  window.history.pushState({}, "Test page", route);
 
+  return {
+    user: userEvent.setup(),
+    ...render(ui, { wrapper: AllTheProviders, ...options }),
+  };
+};
 // re-export everything
 export * from "@testing-library/react";
 

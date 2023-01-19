@@ -13,7 +13,7 @@ export default function Wishlist() {
     <>
       <div>Wishlist Items: {itemsInWishlist}</div>
       <div className="border border-block">
-        <div className="flex gap-6 flex-wrap m-4 margin-left">{content}</div>
+        <ul className="flex gap-6 flex-wrap m-4 margin-left">{content}</ul>
       </div>
     </>
   );
