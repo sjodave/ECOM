@@ -1,20 +1,21 @@
 import React from "react";
-import { Field, Form } from "react-final-form";
+import { Form } from "react-final-form";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import FormField from "../components/FormField.component";
 import { validateForm } from "../Helper/validateForm";
-import { useAuthMutation } from "../utils/store";
-// import { login } from '../utils/Auth/authChecker';
+import { useSignupMutation } from "../utils/store";
+import { createUser } from "../utils/store";
+import { login } from "../utils/Auth/authChecker";
 
 const formFieldValues = [
   {
-    name: "firstname",
+    name: "firstName",
     type: "text",
     placeholder: "First Name",
   },
   {
-    name: "lastname",
+    name: "lastName",
     type: "text",
     placeholder: "Last Name",
   },
@@ -45,22 +46,22 @@ const renderFormFields = formFieldValues.map((field) => {
 });
 
 const SignUp = (props) => {
-  // const dispatch = useDispatch();
-  // const navigate = useNavigate();
-  // //// const [setUser] = useAuthMutation();
-  // const handleSignup = async (values) => {
-  //   const resp = await setUser(values);
-  //   if (resp.data) {
-  //     console.log(resp.data);
-  //     dispatch(createUser({ ...resp.data }));
-  //     login({ ...resp.data });
-  //     navigate("/");
-  //   } else if (resp.error) {
-  //     alert(resp.error.data.message);
-  //   }
-  // };
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [signup] = useSignupMutation();
+  const handleSignup = async (values) => {
+    console.log(values);
+    const resp = await signup(values);
+    if (resp.data) {
+      console.log(resp.data);
+      dispatch(createUser({ ...resp.data }));
+      login({ ...resp.data });
+      navigate("/");
+    } else if (resp.error) {
+      alert(resp.error.data.message);
+    }
+  };
 
-  const handleSignup = () => {};
   const validate = (formValues) => {
     return validateForm(formValues);
   };

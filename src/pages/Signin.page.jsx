@@ -1,26 +1,26 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../utils/Auth/authChecker";
-// import { createUser } from "../utils/store/actions/Auth.actions";
 import { createUser } from "../utils/store";
 import { useAuthMutation } from "../utils/store";
-import { Form, Field } from "react-final-form";
+import { Form } from "react-final-form";
 import FormField from "../components/FormField.component";
+import Modal from "../components/Modal.component";
 
 const SignIn = (props) => {
+  let [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [setUser] = useAuthMutation();
   const handleLogin = async (values) => {
     const resp = await setUser(values);
     if (resp.data) {
-      console.log(resp.data);
       dispatch(createUser({ ...resp.data }));
       login({ ...resp.data });
       navigate("/");
     } else if (resp.error) {
-      alert(resp.error.data.message);
+      setIsOpen(true);
     }
   };
 
@@ -42,8 +42,8 @@ const SignIn = (props) => {
   });
 
   return (
-    <div className="flex h-4/5 flex-col justify-center py-12 sm:px-6 lg:px-8 mt-5">
-      <div className="flex justify-between align-center sm:mx-auto sm:w-full sm:max-w-md">
+    <div className="mt-5 flex h-4/5 flex-col justify-center py-12 sm:px-6 lg:px-8">
+      <div className="align-center flex justify-between sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="text-center text-3xl font-bold tracking-tight text-gray-900">
           Sign in
         </h2>
@@ -59,7 +59,7 @@ const SignIn = (props) => {
           <Form
             onSubmit={handleLogin}
             // validate={validate}
-            initialValues={{ username: "kminchelle", password: "0lelplR" }}
+            // initialValues={{ username: "kminchelle", password: "0lelplR" }}
             initialValuesEqual={() => true}
             render={({ handleSubmit }) => (
               <form className="space-y-6" onSubmit={handleSubmit}>
@@ -88,10 +88,10 @@ const SignIn = (props) => {
         </div>
         <div className=" relative">
           <span
-            className="block absolute -inset-1 -skew-y-3 line-through w-64  "
+            className="absolute -inset-1 block w-64 -skew-y-3 line-through  "
             aria-hidden="true"
           ></span>
-          <div className="relative text-center my-3">New to Website?</div>
+          <div className="relative my-3 text-center">New to Website?</div>
         </div>
         <button
           type="submit"
@@ -100,6 +100,7 @@ const SignIn = (props) => {
         >
           Create an Account
         </button>
+        <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
     </div>
   );

@@ -1,19 +1,12 @@
-import React, { Fragment } from "react";
-import { Form, Field } from "react-final-form";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import {
-  Bars3Icon,
-  BellIcon,
-  XMarkIcon,
-  Bars3BottomLeftIcon,
-} from "@heroicons/react/24/outline";
-import { isLogin, logout } from "../utils/Auth/authChecker";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+import { Bars3BottomLeftIcon, BellIcon } from "@heroicons/react/24/outline";
+import React, { Fragment } from "react";
+import { Field, Form } from "react-final-form";
 import { useDispatch, useSelector } from "react-redux";
-
+import { Link, useNavigate } from "react-router-dom";
+import { isLogin, logout } from "../utils/Auth/authChecker";
 import { destroyUser } from "../utils/store";
-import { useNavigate } from "react-router-dom";
-// import { click } from "@testing-library/user-event/dist/click";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -24,11 +17,8 @@ const Navbar = ({ sideOpen, setSideOpen }) => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const navigateToProfile = () => {
-    navigate("/profile");
-  };
+
   const handleLogout = () => {
-    console.log("called");
     dispatch(destroyUser());
     logout();
     navigate("/");
@@ -36,15 +26,12 @@ const Navbar = ({ sideOpen, setSideOpen }) => {
   const handleSearch = (value) => {
     navigate(`/products/search/${value.search}`);
   };
-  const handleLogin = () => {
-    navigate("/signin");
-  };
 
   const userNavigation = [
-    { name: "Your Profile", href: "#", click: navigateToProfile },
+    { name: "Your Profile", href: "/profile", click: "" },
     isLogin()
-      ? { name: "Logout", href: "#", click: handleLogout }
-      : { name: "Login", href: "#", click: handleLogin },
+      ? { name: "Logout", href: "/", click: handleLogout }
+      : { name: "Login", href: "/signin", click: "" },
   ];
 
   return (
@@ -129,15 +116,15 @@ const Navbar = ({ sideOpen, setSideOpen }) => {
                   {userNavigation.map((item) => (
                     <Menu.Item key={item.name} onClick={item.click}>
                       {({ active }) => (
-                        <a
-                          // href={item.href}
+                        <Link
+                          to={item.href}
                           className={classNames(
                             active ? "bg-gray-100" : "",
                             "block px-4 py-2 text-sm text-gray-700"
                           )}
                         >
                           {item.name}
-                        </a>
+                        </Link>
                       )}
                     </Menu.Item>
                   ))}

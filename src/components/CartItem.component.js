@@ -17,7 +17,7 @@ export default function CartItemCard({ item }) {
   );
 
   return (
-    <div className="Item-container">
+    <li className="Item-container" data-testid="cartItem">
       <div className="Item-details">
         <img
           className="Item-image"
@@ -55,6 +55,6 @@ export default function CartItemCard({ item }) {
           </div>
         </div>
       </div>
-    </div>
+    </li>
   );
 }

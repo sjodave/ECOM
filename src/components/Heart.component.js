@@ -19,6 +19,7 @@ export default function Heart({ product }) {
     <button
       className="rounded text-red hover:bg-gray-200 p-2 ml-3"
       onClick={handleWishlistAction}
+      data-testid="heart"
     >
       {isProductInWishlist ? (
         <TiHeartFullOutline className="text-lg text-red-500 animate-bounce" />

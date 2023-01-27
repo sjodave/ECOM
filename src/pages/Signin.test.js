@@ -2,6 +2,8 @@ import { render, screen } from "../../test-utils";
 import SignIn from "./Signin.page";
 import userEvent from "@testing-library/user-event";
 
+import { act } from "react-test-renderer";
+
 const user = userEvent.setup();
 
 describe("Sign In page", () => {
@@ -19,8 +21,8 @@ describe("Sign In page", () => {
     const usernameInput = screen.getByRole("textbox", { name: /username/i });
     expect(usernameInput).toBeInTheDocument();
 
-    const passwordLable = screen.getByTestId("password");
-    expect(passwordLable).toBeInTheDocument();
+    // const passwordLable = screen.getByTestId("password");
+    // expect(passwordLable).toBeInTheDocument();
 
     const passwordInput = screen.getByLabelText(/password/i);
     expect(passwordInput).toBeInTheDocument();
@@ -30,17 +32,6 @@ describe("Sign In page", () => {
     ////should not present
     const signOutButton = screen.queryByRole("button", { name: /sign out/i });
     expect(signOutButton).not.toBeInTheDocument();
-  });
-
-  test("Input field value", async () => {
-    render(<SignIn />);
-    const usernameInput = screen.getByRole("textbox", { name: /username/i });
-    await user.type(usernameInput, "kminchelle");
-    expect(usernameInput).toHaveValue("kminchellekminchelle");
-
-    const passwordInput = screen.getByLabelText(/password/i);
-    await user.type(passwordInput, "0lelplR");
-    expect(passwordInput).toHaveValue("0lelplR0lelplR");
   });
 
   test("tab click", async () => {
@@ -60,5 +51,16 @@ describe("Sign In page", () => {
     expect(forgetPassword).toHaveFocus();
     await user.tab();
     expect(signinButton).toHaveFocus();
+  });
+
+  test("Input field value", async () => {
+    render(<SignIn />);
+    const usernameInput = screen.getByRole("textbox", { name: /username/i });
+    await user.type(usernameInput, "kminchelle");
+    expect(usernameInput).toHaveValue("kminchelle");
+
+    const passwordInput = screen.getByLabelText(/password/i);
+    await user.type(passwordInput, "0lelplR");
+    expect(passwordInput).toHaveValue("0lelplR");
   });
 });

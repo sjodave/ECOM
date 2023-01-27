@@ -8,15 +8,18 @@ export default function SearchProducts() {
   const { id } = useParams();
   const { data, isFetching } = useSearchProductQuery(id);
   if (isFetching) return <SkelProductList />;
-  console.log(data);
   let content = (
     <div>No result found for your search. Try searching for other items</div>
   );
+  console.log(
+    "🚀 ~ file: SearchProducts.page.jsx:23 ~ SearchProducts ~ data",
+    data
+  );
   if (data?.products.length) {
     content = data.products.map((e) => {
-      return <ProductCard product={e} />;
+      return <ProductCard product={e} key={e.title} />;
     });
   }
 
-  return <div className="flex flex-wrap gap-5 justify-evenly">{content}</div>;
+  return <ul className="flex flex-wrap gap-5 justify-evenly">{content}</ul>;
 }

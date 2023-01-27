@@ -27,7 +27,7 @@ function Dashboard() {
           setSortBy(e.target.value.split(","));
         }}
       >
-        <option value={null}>Sort By</option>
+        <option value={""}>Sort By</option>
         <option value={["price", "asc"]}>Price low to high</option>
         <option value={["discountPercentage", "decs"]}>Discount</option>
         <option value={["rating", "decs"]}>Rating</option>

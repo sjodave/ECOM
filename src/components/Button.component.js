@@ -1,10 +1,5 @@
-const Button = ({
-    label
-}) => {
+const Button = ({ label }) => {
+  return <button>{label}</button>;
+};
 
-    return (
-      <button>{label}</button>
-    )
-  }
-  
-  export default Button;
+export default Button;

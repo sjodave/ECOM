@@ -7,7 +7,6 @@ import priceAfterDiscount from "../Helper/priceAfterDiscount";
 
 export default function Cart() {
   const { cartProducts: cart } = useSelector((state) => state.cartProducts);
-
   const discountedTotal = cart.reduce((acc, product) => {
     return (acc += +priceAfterDiscount(
       product.price,
@@ -24,12 +23,12 @@ export default function Cart() {
             <span>My Cart ({cart.length} items)</span>
             <span>Total After Discount: ${discountedTotal}</span>
           </div>
-          <div className="Cart-items-container">
+          <ul className="Cart-items-container">
             {cart.length === 0 ? <h3>Cart Empty</h3> : ""}
             {cart.map((item) => (
               <CartItem id={item.id} key={item.id} item={item} />
             ))}
-          </div>
+          </ul>
         </div>
         <div className="Cart-checkout">
           <div className="Price-container">

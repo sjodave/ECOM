@@ -7,8 +7,8 @@ export default function useSort(data) {
   const sortValue = (x) => {
     return x[sortby[0]];
   };
-  if (sortby) {
-    sortedData = [...data?.products].sort((a, b) => {
+  if (sortby && data) {
+    sortedData = [...data.products].sort((a, b) => {
       const valueA = sortValue(a);
       const valueB = sortValue(b);
 
@@ -21,5 +21,6 @@ export default function useSort(data) {
       }
     });
   }
+
   return { sortedData, setSortBy };
 }

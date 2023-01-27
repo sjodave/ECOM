@@ -21,7 +21,12 @@ const navigation = [
   { name: "Dashboard", href: "/", icon: HomeIcon, current: true },
   { name: "Cart", href: "/cart", icon: FaShoppingCart, current: false },
   { name: "Wishlist", href: "/wishlist", icon: AiOutlineHeart, current: false },
-  { name: "Category", href: "/category", icon: BiCategory, current: false },
+  {
+    name: "Category",
+    href: "/category/smartphones",
+    icon: BiCategory,
+    current: false,
+  },
 ];
 const userNavigation = [
   { name: "Your Profile", href: "#" },
