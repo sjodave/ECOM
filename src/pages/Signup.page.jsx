@@ -50,7 +50,6 @@ const SignUp = (props) => {
   const navigate = useNavigate();
   const [signup] = useSignupMutation();
   const handleSignup = async (values) => {
-    alert(1);
     console.log(values);
     const resp = await signup(values);
     if (resp.data) {

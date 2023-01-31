@@ -59,7 +59,7 @@ const SignIn = (props) => {
           <Form
             onSubmit={handleLogin}
             // validate={validate}
-            // initialValues={{ username: "kminchelle", password: "0lelplR" }}
+            initialValues={{ username: "kminchelle", password: "0lelplR" }}
             initialValuesEqual={() => true}
             render={({ handleSubmit }) => (
               <form className="space-y-6" onSubmit={handleSubmit}>

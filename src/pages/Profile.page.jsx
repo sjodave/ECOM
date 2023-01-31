@@ -16,7 +16,8 @@ function List({ auth }) {
   for (let property in auth) {
     if (
       typeof auth[property] !== "object" &&
-      // !Array.isArray(auth[property]) &&
+      property !== "token" &&
+      auth[property] &&
       property !== "password"
     ) {
       content.push(
@@ -24,12 +25,12 @@ function List({ auth }) {
           {property}:{auth[property]}
         </li>
       );
-    } else if (typeof auth[property] == "object" && property !== "password") {
-      content.push(
-        <ol>
-          {property} - {<List className="ml-5" auth={auth[property]} />}
-        </ol>
-      );
+      // } else if (typeof auth[property] == "object" && property !== "password") {
+      //   content.push(
+      //     <ol>
+      //       {property} - {<List className="ml-5" auth={auth[property]} />}
+      //     </ol>
+      //   );
     }
   }
   return content;
