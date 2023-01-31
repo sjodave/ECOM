@@ -8,20 +8,20 @@ export default function FormField({ field }) {
         name={field.name}
         render={({ input, meta }) => (
           <div>
-            <label
-              htmlFor={field.name}
-              className="block text-sm font-medium text-gray-700"
-            >
-              {field.placeholder}
-            </label>
             <input
               required
               type={field.type}
               {...input}
               placeholder={field.placeholder}
               id={field.name}
-              className="mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+              className="peer  relative mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-transparent shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
             />
+            <label
+              htmlFor={field.name}
+              className="absolute left-3 -top-3 block bg-white px-1 text-sm font-medium text-gray-700 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-gray-400"
+            >
+              {field.placeholder}
+            </label>
             {meta.touched && meta.error && !meta.active && (
               <span className="text-xs  text-red-400  ">{meta.error}</span>
             )}

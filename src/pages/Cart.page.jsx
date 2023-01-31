@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import "../Styles/Cart.page.css";
 import CartItem from "../components/CartItem.component";
 import calculateTotal from "../Helper/calculateTotal";
 import priceAfterDiscount from "../Helper/priceAfterDiscount";
@@ -17,55 +16,50 @@ export default function Cart() {
 
   return (
     <>
-      <section className="Cart-container">
-        <div className="Cart-products">
-          <div className="Cart-products-title">
+      <section className="flex flex-wrap gap-3">
+        <div className=" flex-1 border border-solid  p-8">
+          <div className="mb-4 flex justify-between font-semibold ">
             <span>My Cart ({cart.length} items)</span>
             <span>Total After Discount: ${discountedTotal}</span>
           </div>
-          <ul className="Cart-items-container">
+          <ul>
             {cart.length === 0 ? <h3>Cart Empty</h3> : ""}
             {cart.map((item) => (
               <CartItem id={item.id} key={item.id} item={item} />
             ))}
           </ul>
         </div>
-        <div className="Cart-checkout">
-          <div className="Price-container">
-            <div className="Price-header">
+        <div className=" border border-solid px-3 py-4 text-sm lg:w-[30%]">
+          <div className=" mt-4 space-y-5">
+            <div className=" text-gray-700">
               PRICE DETAILS ({cart.length} items)
             </div>
-            <div className="Price-breakup-container">
-              <div className="Price-breakup-row">
-                <span className="Price-title">Total MRP</span>
-                <span className="Price-value">
-                  <i className="fas fa-rupee-sign icon-rupee"></i>
-                  {cartTotal}
-                </span>
+            <div className=" space-y-3">
+              <div className=" flex justify-between">
+                <span>Total MRP</span>
+                <span>{cartTotal}</span>
               </div>
-              <div className="Price-breakup-row">
-                <span className="Price-title">Discount on MRP</span>
-                <span className="Price-value color-green">
+              <div className="flex justify-between">
+                <span>Discount on MRP</span>
+                <span className="text-green-600">
                   -&nbsp;
-                  <i className="fas fa-rupee-sign icon-rupee color-green"></i>
+                  <i className="color-green"></i>
                   {cartTotal - discountedTotal}
                 </span>
               </div>
-              <div className="Price-breakup-row">
-                <span className="Price-title">Delivery Charges</span>
-                <span className="Price-value color-green">FREE</span>
+              <div className="flex justify-between">
+                <span>Delivery Charges</span>
+                <span className=" text-green-600">FREE</span>
               </div>
-              <div className="Price-total-row">
-                <span className="Total-header">Total Amount</span>
-                <span className="Total-value">
-                  <i className="fas fa-rupee-sign icon-rupee"></i>
-                  {discountedTotal}
-                </span>
+              <hr />
+              <div className="flex justify-between font-semibold ">
+                <span>Total Amount</span>
+                <span>{discountedTotal}</span>
               </div>
             </div>
           </div>
-          <div className="Button-container">
-            <button className="Checkout-button">Place Order</button>
+          <div className="mt-6 flex justify-center">
+            <button className="btn-primary">Place Order</button>
           </div>
         </div>
       </section>

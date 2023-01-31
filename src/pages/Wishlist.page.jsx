@@ -12,8 +12,10 @@ export default function Wishlist() {
   return (
     <>
       <div>Wishlist Items: {itemsInWishlist}</div>
-      <div className="border border-block">
-        <ul className="flex gap-6 flex-wrap m-4 margin-left">{content}</ul>
+      <div className="border-block border">
+        <ul className="mt-5 flex flex-1 flex-wrap justify-evenly gap-6">
+          {content}
+        </ul>
       </div>
     </>
   );

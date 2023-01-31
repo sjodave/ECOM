@@ -3,23 +3,34 @@ import { useSelector } from "react-redux";
 
 export default function Profile() {
   const auth = useSelector((state) => state.auth);
-  // const content =auth?.map((e)=><div>e</div>)
-  // console.log(auth);
+  return (
+    <ul className="margin-left" style={{ overflow: "scroll" }}>
+      <List auth={auth} />
+    </ul>
+  );
+}
+
+function List({ auth }) {
+  console.table(auth);
   const content = [];
-  for (let key in auth) {
-    if (typeof auth[key] !== Object || Array) {
-      // console.log(auth[key]);
+  for (let property in auth) {
+    if (
+      typeof auth[property] !== "object" &&
+      // !Array.isArray(auth[property]) &&
+      property !== "password"
+    ) {
       content.push(
-        <div>
-          {key}:{auth[key]}
-        </div>
+        <li>
+          {property}:{auth[property]}
+        </li>
+      );
+    } else if (typeof auth[property] == "object" && property !== "password") {
+      content.push(
+        <ol>
+          {property} - {<List className="ml-5" auth={auth[property]} />}
+        </ol>
       );
     }
   }
-  console.log(content);
-  return (
-    <div className="margin-left" style={{ overflow: "scroll" }}>
-      {"content"}
-    </div>
-  );
+  return content;
 }

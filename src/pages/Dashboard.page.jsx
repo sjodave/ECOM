@@ -33,7 +33,7 @@ function Dashboard() {
         <option value={["rating", "decs"]}>Rating</option>
         <option value={["price", "decs"]}>Price high to low</option>
       </select>
-      <ul className="flex justify-evenly  gap-6 flex-wrap mt-5 margin-left">
+      <ul className="mt-5 flex flex-1 flex-wrap justify-evenly sm:gap-6">
         {content}
       </ul>
     </div>

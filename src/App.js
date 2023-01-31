@@ -19,11 +19,11 @@ function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex h-screen flex-col">
       <Sidebar sideOpen={sidebarOpen} setSideOpen={setSidebarOpen} />
       <Navbar sideOpen={sidebarOpen} setSideOpen={setSidebarOpen} />
 
-      <main className="flex-1 md:pl-72 p-4">
+      <main className="flex-1 md:pl-72">
         <Routes>
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
