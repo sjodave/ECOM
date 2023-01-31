@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { setCart, useFetchProductQuery } from "../utils/store";
@@ -9,7 +9,7 @@ import isObjectInArray from "../Helper/isObjectInArray";
 const ProductDetails = () => {
   const { id: productId } = useParams();
   const dispatch = useDispatch();
-  const { data, error, isFetching, refetch } = useFetchProductQuery(productId);
+  const { data, error, isFetching } = useFetchProductQuery(productId);
   const { cartProducts } = useSelector((state) => state.cartProducts);
   let isProductInCart = isObjectInArray(cartProducts, productId);
   const navigate = useNavigate();
@@ -37,13 +37,13 @@ const ProductDetails = () => {
             <div className="flex gap-1">
               Rating : <RatingStars rating={rating} /> {rating}
             </div>
-            <div className="mt-3">
+            <div className="mt-3 flex">
               {!isProductInCart ? (
-                <button className="Checkout-button" onClick={addToCart}>
+                <button className="btn-primary" onClick={addToCart}>
                   Add To Cart
                 </button>
               ) : (
-                <button className="Checkout-button" onClick={goToCart}>
+                <button className="btn-primary" onClick={goToCart}>
                   Go To Cart
                 </button>
               )}
