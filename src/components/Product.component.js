@@ -1,17 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import isObjectInArray from "../Helper/isObjectInArray";
-
-import "../Styles/product.css";
+import { IoTrashBin } from "react-icons/io5";
+import { RiShoppingCartFill } from "react-icons/ri";
 import { deleteCartItem, setCart } from "../utils/store";
 import Heart from "./Heart.component";
 import RatingStars from "./RatingStars.component";
+import DisplayFeedback from "./DisplayFeedback";
+import useDisplayFeedback from "../Hooks/useFeedback";
 
 export default function ProductCard({ product }) {
+  const { isOpen, setIsOpen, msg, setMsg } = useDisplayFeedback();
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const { displayFeedback, setFeedbackText } = useContext(FeedbackContext);
 
   const { cartProducts } = useSelector((state) => state.cartProducts);
   let isProductInCart = isObjectInArray(cartProducts, product.id);
@@ -24,54 +27,55 @@ export default function ProductCard({ product }) {
     e.stopPropagation();
     e.preventDefault();
     if (isProductInCart) {
-      // displayFeedback("Removed From Cart");
+      setMsg("Removed From Cart");
+      setIsOpen(true);
       isProductInCart = false;
       dispatch(deleteCartItem(product.id));
     } else {
-      // displayFeedback("Added to Cart");
+      setMsg("Added to Cart");
+      setIsOpen(true);
       isProductInCart = true;
       dispatch(setCart(product));
     }
   };
 
   return (
-    <li
-      className="ProductCard"
-      onClick={() => navigate(`/products/${product.id}`)}
-    >
-      <div className="ProductCard-body w-36 md:w-44 mb-5 cursor-pointer">
+    <li onClick={() => navigate(`/products/${product.id}`)}>
+      <DisplayFeedback isOpen={isOpen} setIsOpen={setIsOpen} msg={msg} />
+
+      <div className="mb-5 w-40 cursor-pointer text-sm md:w-44">
         <img
-          className="Product-image  object-fill"
+          className="h-52 w-full object-fill"
           src={product.thumbnail}
           alt={product.title}
         />
-        <div className="Product-info">
-          <div className="Product-actions">
-            <div className="flex items-center">
+        <div>
+          <div>
+            <div className="flex items-center justify-center">
               <Heart product={product} />
               &nbsp;
-              <button
-                onClick={handleCartActions}
-                className="Action-button Button-cart"
-              >
-                {isProductInCart ? "Remove From Cart" : "Add to Cart"}
+              <button onClick={handleCartActions} className="btn-cart">
+                {isProductInCart ? <IoTrashBin /> : <RiShoppingCartFill />}
               </button>
             </div>
           </div>
-          <h3 className="Product-brand mt-2">{product.brand}</h3>
-          <div className="Product-name">{product.title}</div>
-          <div className="Product-price">
+
+          <div className="mb-1 leading-5">
+            <h3 className=" mt-2 truncate text-base  font-semibold ">
+              {product.brand}
+            </h3>
+            <div className=" truncate">{product.title}</div>
             <span>
-              <span className="Product-discountedPrice">
-                $ {priceAfterDiscount}
+              <span className=" font-semibold">$ {priceAfterDiscount}</span>
+              <span className=" px-2 text-xs text-gray-600 line-through">
+                ${product.price}
               </span>
-              <span className="Product-orignalPrice">${product.price}</span>
             </span>
-            <span className="Product-discountPercent">
+            <span className=" text-xs text-red-500">
               ({product.discountPercentage}% OFF)
             </span>
-            <RatingStars rating={product.rating} />
           </div>
+          <RatingStars rating={product.rating} />
         </div>
       </div>
     </li>

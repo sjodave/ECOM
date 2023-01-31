@@ -9,8 +9,8 @@ export const validateForm = (formValues) => {
   if (formValues.phone?.length !== 10) {
     errors.phone = "phone number should be of 10 digits";
   }
-  if (formValues.firstname?.length < 3 || !formValues.firstname) {
-    errors["firstname"] = "Name should be atleast 3 chars";
+  if (formValues.firstName?.length < 3 || !formValues.firstName) {
+    errors["firstName"] = "Name should be atleast 3 chars";
   }
   if (formValues.password?.length < 6 || formValues.password?.length > 30) {
     errors["password"] =
