@@ -1,10 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import CartItem from "../components/CartItem.component";
+import DisplayFeedback from "../components/DisplayFeedback";
 import calculateTotal from "../Helper/calculateTotal";
 import priceAfterDiscount from "../Helper/priceAfterDiscount";
+import useDisplayFeedback from "../Hooks/useFeedback";
 
 export default function Cart() {
+  const { isOpen, setIsOpen, msg, setMsg } = useDisplayFeedback();
+
   const { cartProducts: cart } = useSelector((state) => state.cartProducts);
   const discountedTotal = cart.reduce((acc, product) => {
     return (acc += +priceAfterDiscount(
@@ -13,6 +17,10 @@ export default function Cart() {
     ));
   }, 0);
   const cartTotal = calculateTotal(cart, "price");
+  const handleOrder = () => {
+    setMsg("Order Placed");
+    setIsOpen(true);
+  };
 
   return (
     <>
@@ -59,10 +67,13 @@ export default function Cart() {
             </div>
           </div>
           <div className="mt-6 flex justify-center">
-            <button className="btn-primary">Place Order</button>
+            <button className="btn-primary" onClick={handleOrder}>
+              Place Order
+            </button>
           </div>
         </div>
       </section>
+      <DisplayFeedback isOpen={isOpen} setIsOpen={setIsOpen} msg={msg} />
     </>
   );
 }
