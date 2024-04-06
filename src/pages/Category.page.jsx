@@ -34,7 +34,9 @@ export default function Category() {
     return (
       <li
         key={e}
-        className="border-slate-700 border  p-3 	rounded inline-block hover:bg-slate-700 hover:text-white"
+        className={`inline-block rounded  border 	border-slate-700 p-3 hover:bg-slate-700 hover:text-white ${
+          category === e ? "bg-slate-700 text-white" : ""
+        }`}
         onClick={(e) => setCategory(e.target.innerText)}
         data-testid={e}
       >
@@ -53,7 +55,7 @@ export default function Category() {
   return (
     <div>
       <ul className="flex flex-wrap gap-1 ">{renderCategoryList}</ul>
-      <ul className="flex flex-wrap mt-4 gap-4">{content}</ul>
+      <ul className="mt-4 flex flex-wrap gap-4">{content}</ul>
     </div>
   );
 }
