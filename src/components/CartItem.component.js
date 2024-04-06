@@ -34,7 +34,7 @@ export default function CartItemCard({ item }) {
               </div>
             </div>
             <div className=" mb-2">
-              <div>{discountedPrice}</div>
+              <div>$ {discountedPrice}</div>
               <div>
                 <span className=" text-xs text-gray-600 line-through">
                   $ {item.price}
@@ -45,7 +45,7 @@ export default function CartItemCard({ item }) {
               </div>
             </div>
           </div>
-          <div>
+          <div className="flex w-full justify-between">
             <button onClick={() => removeFromCart()} className="btn-cart">
               <IoTrashBin className="text-lg" />
             </button>

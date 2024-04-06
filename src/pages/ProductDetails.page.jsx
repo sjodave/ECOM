@@ -26,8 +26,8 @@ const ProductDetails = () => {
     const { id, images, title, price, description, category, rating } = data;
     return (
       <>
-        Product Details:
-        <div className="flex flex-row flex-wrap">
+        <div>Product Details:</div>
+        <div className="mt-2 flex flex-row flex-wrap">
           <img src={images[0]} alt={title} className=" max-h-60 max-w-5xl" />
           <div className="col-8 p-5">
             <div className=" text-gray-500 ">{category}</div>
@@ -37,7 +37,7 @@ const ProductDetails = () => {
             <div className="flex gap-1">
               Rating : <RatingStars rating={rating} /> {rating}
             </div>
-            <div className="mt-3 flex">
+            <div className="mt-3 flex gap-3">
               {!isProductInCart ? (
                 <button className="btn-primary" onClick={addToCart}>
                   Add To Cart

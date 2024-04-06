@@ -23,7 +23,7 @@ function App() {
       <Sidebar sideOpen={sidebarOpen} setSideOpen={setSidebarOpen} />
       <Navbar sideOpen={sidebarOpen} setSideOpen={setSidebarOpen} />
 
-      <main className="flex-1 md:pl-72">
+      <main className="flex-1 pt-5 md:pl-72">
         <Routes>
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />

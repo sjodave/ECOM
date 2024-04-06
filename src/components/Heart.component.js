@@ -28,12 +28,12 @@ export default function Heart({ product }) {
     <div>
       <DisplayFeedback isOpen={isOpen} setIsOpen={setIsOpen} msg={msg} />
       <button
-        className="btn-cart"
+        className="btn-cart  h-full w-full"
         onClick={handleWishlistAction}
         data-testid="heart"
       >
         {isProductInWishlist ? (
-          <TiHeartFullOutline className="animate-bounce text-lg text-red-500" />
+          <TiHeartFullOutline className="text-lg text-red-500" />
         ) : (
           <AiOutlineHeart className="text-lg" />
         )}

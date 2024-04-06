@@ -2,7 +2,6 @@ import React, { Fragment, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { MdCancel } from "react-icons/md";
 export default function DisplayFeedback({ isOpen, setIsOpen, msg }) {
-  console.log(msg.includes("Added"));
   useEffect(() => {
     const id = setTimeout(() => {
       closeModal();
